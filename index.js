@@ -512,6 +512,8 @@ const generateReport = async (options) => {
               description: message,
               message: issue.message,
               key: issue.key,
+              //added issues type
+              type: issue.type,
             };
           })
         );
