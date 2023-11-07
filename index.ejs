@@ -16,15 +16,18 @@
 <body>
   <div class="summup">
     <!-- insert your company banner here -->
-    <!--
 		<p class="banner">
-			<a href="https://www.soprasteria.com/" target="_blank">
-				<img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/02/Sopra_Steria_logo.svg/1280px-Sopra_Steria_logo.svg.png" alt="Sopra Steria" height="50">
+			<a href="https://www.invitalia.it/" target="_blank">
+				<img src="./icons/Logo_Invitalia.png" alt="Invitalia" height="50">
 			</a>
 		</p>
-		-->
 
-    <h1>SonarQube <%= vulnerabilityPhrase %> Report</h1>
+    <a href="https://www.sonarsource.com/products/sonarqube/" target="_blank">
+      <img src="./icons/sonarqube-icon.png" alt="SonarQube" height="50">
+    </a>
+    <h1>
+      <%= vulnerabilityPhrase %> Report
+    </h1>
 
     <dl>
       <dt>Report Generated On</dt>
@@ -51,12 +54,12 @@
       <dd>
         <%= branch %>
       </dd>
-
+      <!--
       <dt>Delta Analysis</dt>
       <dd>
         <%= deltaAnalysis %>
       </dd>
-
+      -->
       <%if (!noCoverage) { %>
 
       <dt>Coverage</dt>
@@ -77,7 +80,13 @@
     </dl>
 
     <%if (qualityGateStatus) { %>
-    <h2>Quality Gate Status: <%= qualityGateStatus.projectStatus.status %> since <%= qualityGateStatusPeriodDate %></h2>
+    <h2>Last Quality Gate Status: <%= qualityGateStatusPeriodDate %> 
+      <%if (qualityGateStatus.projectStatus.status == 'OK') { %>
+      PASSED
+      <% } else {%>
+      NOT PASSED
+      <% } %>
+    </h2>
 
     <table>
       <thead>
@@ -90,19 +99,20 @@
       <tbody>
 
         <% for (const condition of qualityGateStatus.projectStatus.conditions) { %>
-        <tr>
-          <td style="background-color:<%- condition.status == 'OK' ? '#0a0' : '#d4333f' %>"></td>
-          <td>
-            <%= condition.metricKey %>
-          </td>
-          <td>
-            <%= condition.actualValue %>
-            <%= condition.comparator=='GT' ? '>' : '<' %>
-            <%= condition.errorThreshold %>
-          </td>
-        </tr>
+          <%if (condition.actualValue) { %>
+            <tr>
+              <td style="background-color:<%- condition.status == 'OK' ? '#0a0' : '#d4333f' %>"></td>
+              <td>
+                <%= condition.metricKey %>
+              </td>
+              <td>
+                <%= condition.actualValue %>
+                <%= condition.comparator=='GT' ? '>' : '<' %>
+                <%= condition.errorThreshold %>
+              </td>
+            </tr>
+          <% } %>
         <% } %>
-
       </tbody>
     </table>
     <% } %>
