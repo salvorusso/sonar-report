@@ -46,9 +46,24 @@ sonar-report \
   --release="1.0.0" \
   --branch="master" \
   --output="samples/sonar-report_sonar-report.html"
-
-# Open in browser
-xdg-open samples/sonar-report_sonar-report.html
+```
+```bash
+# Generate report example
+node ./cli.js
+--project="Anagrafica e Deleghe FE" 		#nome del progetto visualizzato nel file
+--application="Minerva"				#nome dell’ applicazione visualizzato nel file
+--release="1.0.1"  				#numero della release visualizzata nel file
+--coverage 					#estrarre anche i dati di coverage
+--link-issues 					#link al server invitalia delle vulnerabilità individuate
+--quality-gate-status   				#per inserire nel file il risultato del Quality Gate
+--allbugs					#inserisce nel report bug e code smells
+--only-detected-rules 				#rimuove dal documento le regole non rilevate
+--sonarorganization="invitalia"  		#nome dell’ organizzazione di SonarQube
+--sonarurl="https://sonarqube.invitalia.it/" 	#url del server di riferimento
+--sonarcomponent="minerva-anagraficaedeleghe-fe"	#id del progetto da reportare
+--sonartoken="{{token}}"  			#user token generato da SonarQube
+--branch="main"   				#nome del branch del progetto da analizzare
+--output="C:/{{percorso}}/sonar-report.html"	#percorso di salvataggio del file
 ```
 
 ## Migrate to v3
