@@ -37,6 +37,7 @@ Generate a vulnerability report from a SonarQube instance.
 
 ```bash
 # Generate report example
+
 sonarqube-report \
   --project="my-project" \
   --application="my-application" \
@@ -52,6 +53,7 @@ sonarqube-report \
   --sonartoken="$TOKEN"  \
   --branch="main"  \
   --output="./report.html"
+
 ```
 
 ## Migrate to v3
